@@ -14,6 +14,11 @@ api = Api(app)
 jwt = JWT(app, authentication, identity)
 
 
+@app.before_first_request
+def create_table():
+    db.create_all()
+
+
 api.add_resource(Item, '/item/<string:name>')
 api.add_resource(ItemList, '/items')
 api.add_resource(UserResgister, '/register')
